@@ -1,0 +1,19 @@
+.Filtes {
+  width: var(--widthScream);
+  margin: auto;
+  justify-content: space-between;
+}
+
+.Filtes input {
+  width: calc(var(--widthScream) / 2 );
+  border-radius: 5px;
+  border: none;
+  flex-grow: 1;
+}
+
+.Filtes select {
+  width: calc(var(--widthScream) / 4 );
+  margin-right: 10px;
+  border-radius: 5px;
+  border: none;
+}

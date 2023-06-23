@@ -1,0 +1,16 @@
+.GameList {
+  width: 95vw;
+}
+
+.games-display {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .games-display {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

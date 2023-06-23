@@ -1,0 +1,64 @@
+:root {
+  --widthScream: 90vw
+}
+
+.GameCard {
+  transition: all .2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--widthScream);
+  margin: 10px auto;
+  background-color: rgb(236, 236, 236);
+  border-radius: 20px;
+  color: black;
+}
+
+.GameCard:hover {
+  transform: scale(1.1);
+}
+
+.GameCard img {
+  border-radius: 20px;
+  width: var(--widthScream);
+}
+
+.dev {
+  margin: 0;
+}
+
+.title {
+  align-self: flex-start;
+  word-wrap: break-word;
+}
+
+.title p {
+  color: rgb(136, 136, 136);
+  align-self: flex-start;
+}
+
+.title h1 {
+  margin: 0;
+  align-self: flex-start;
+  word-wrap: break-word;
+}
+
+.sub-text {
+  width: calc(var(--widthScream) * 0.9);
+  min-height: 30vh;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.genre {
+  color: rgb(72, 31, 182);
+  font-weight: bolder;
+}
+
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  :root {
+    --widthScream: 30vw
+  }
+}

@@ -1,0 +1,17 @@
+.Header {
+  align-self: flex-start;
+  width: var(--widthScream);
+  margin: auto;
+}
+
+.Header h1 {
+  margin-right: 10px;
+}
+
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .Header {
+    width: 90vw;
+  }
+}
