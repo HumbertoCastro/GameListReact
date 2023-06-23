@@ -1,15 +1,28 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Game list
 
-## Available Scripts
 
-In the project directory, you can run:
+## Scripts disponiveis
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Roda o projeto no modo de desenvolvimento.\
+[http://localhost:3000](http://localhost:3000)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+
+
+### `Print do projeto`
+## Pagina principal
+![Main page](/src/img/main.png)
+
+## Loading PC
+![Loading](/src/img/load.png)
+
+## Error pc
+![Error img](/src/img/error.png)
+
+## Loading mobile
+![Loading mobile](/src/img/loadMobile.png)
+
+## Pagina principal mobile
+![Main page mobile](/src/img/mainMobile.png)
