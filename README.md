@@ -2,13 +2,17 @@
 ### Game list
 
 
+### Link para ver o projeto
+
+https://humbertocastro.github.io/GameListReact/
+
+
 ## Scripts disponiveis
 
 ### `npm start`
 
 Roda o projeto no modo de desenvolvimento.\
 [http://localhost:3000](http://localhost:3000)
-
 
 
 ### `Print do projeto`
