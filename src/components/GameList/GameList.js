@@ -5,6 +5,7 @@ import gameContext from '../../context/gameContext';
 import GameCard from '../GameCard/GameCard';
 import Filtes from '../Filtes/Filtes';
 import Error from '../Error/Error';
+import Loading from '../Loading/Loading';
 const badStatus = [500, 502, 504, 504, 507, 508, 509];
 
 const GameList = () => {
@@ -75,7 +76,7 @@ const GameList = () => {
         games ? games.length <= 0 ? <div>
           <Filtes />
           <p>No match</p>
-        </div> : renderGames() : <p>Loading</p>
+        </div> : renderGames() : <Loading />
       }
     </div>
   )

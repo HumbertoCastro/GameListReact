@@ -6,7 +6,7 @@ import controler from '../../img/controller.svg'
 const Header = () => (
   <header className="Header row">
     <h1>
-      GameList
+      GAMELIST
     </h1>
     <img src={controler} />
   </header>
