@@ -9,7 +9,7 @@ const badStatus = [500, 502, 504, 504, 507, 508, 509];
 
 const GameList = () => {
   const [error, setError] = useState(false);
-  const [errMsg, setErrMsg] = useState('');
+  const [errMsg, setErrMsg] = useState(['']);
   const {
     games,
     setGames,
@@ -19,7 +19,7 @@ const GameList = () => {
   const request = async () => {
 
     const timeoutPromise = new Promise((resolve, reject) => {
-      setTimeout(resolve, 5000, {'status': 999});
+      setTimeout(resolve, 5000, {'status': 408});
     });
 
     const url = 'https://games-test-api-81e9fb0d564a.herokuapp.com/api/data';
@@ -31,19 +31,19 @@ const GameList = () => {
       }),
       timeoutPromise
     ]);
-    if (res.status === 999) {
-      setErrMsg('O servidor demorou para responder, tente mais tarde');
+    if (res.status === 408) {
+      setErrMsg(['O servidor demorou para responder, tente mais tarde', res.status]);
       setError(true);
     }
     else if (badStatus.includes(res.status)) {
-      setErrMsg('O servidor fahou em responder, tente recarregar a página');
+      setErrMsg(['O servidor fahou em responder, tente recarregar a página', res.status]);
       setError(true);
     } else if (res.status === 200) {
       const jsonRes = await res.json();
       setGames(jsonRes);
       setUnFilter(jsonRes);
     } else {
-      setErrMsg('O servidor não conseguirá responder por agora, tente voltar novamente mais tarde');
+      setErrMsg(['O servidor não conseguirá responder por agora, tente voltar novamente mais tarde', res.status]);
       setError(true);
     }
   }

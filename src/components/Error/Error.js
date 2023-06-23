@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Error.css';
+import errorsvg from '../../img/emoji-frown.svg'
 
 const Error = ({msg}) => (
-  <h1 className="Error">
-    {
-      msg
-    }
-  </h1>
+  <div className='Error column'>
+    <img src={ errorsvg } alt='error-sad-face' />
+    <h1 className="column">
+      {
+        msg[1]
+      }
+    </h1>
+    <p>{ msg[0] }</p>
+  </div>
 );
 
 Error.propTypes = {};
