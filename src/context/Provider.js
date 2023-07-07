@@ -5,12 +5,15 @@ import gameContext from './gameContext';
 function Provider({ children }) {
   const [games, setGames] = useState();
   const [unFilterGames, setUnFilter] = useState();
+  const [user, setUser] = useState();
 
   const contextValue = {
     games,
     setGames,
     unFilterGames,
     setUnFilter,
+    user,
+    setUser,
   };
 
   return (

@@ -21,3 +21,7 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+.s-btw {
+  justify-content: space-between;
+}

@@ -6,16 +6,27 @@ import GameCard from '../GameCard/GameCard';
 import Filtes from '../Filtes/Filtes';
 import Error from '../Error/Error';
 import Loading from '../Loading/Loading';
+import { addFavMovie, getFavGames, writeUserData } from '../../firebase';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+const auth = getAuth();
+// Verificar o estado de autenticação do usuário
 const badStatus = [500, 502, 504, 504, 507, 508, 509];
 
 const GameList = () => {
   const [error, setError] = useState(false);
   const [errMsg, setErrMsg] = useState(['']);
+  const [favs, setFavs] = useState(['']);
+
   const {
     games,
     setGames,
     setUnFilter,
+    user,
   } = useContext(gameContext);
+
+  const adicionarFilmeFavorito = (title) => {
+    addFavMovie(user, title);
+  };
 
   const request = async () => {
 
@@ -32,6 +43,7 @@ const GameList = () => {
       }),
       timeoutPromise
     ]);
+    console.log(res);
     if (res.status === 408) {
       setErrMsg(['O servidor demorou para responder, tente mais tarde', res.status]);
       setError(true);
@@ -49,7 +61,13 @@ const GameList = () => {
     }
   }
 
+  const getFavs = async () => {
+    const list = await getFavGames(user);
+    setFavs(list);
+  }
+
   useEffect(() => {
+    getFavs();
     request();
   }, [])
 
@@ -59,10 +77,20 @@ const GameList = () => {
       <div className='games-display'>
         {
           games.length > 0 ? games.map(({ developer, thumbnail, genre, release_date, short_description, title}) => (
-            <GameCard dev={ developer } thumb={ thumbnail } genre={ genre } date={ release_date } desc={ short_description} title={ title } />
+            <GameCard
+              dev={ developer }
+              thumb={ thumbnail }
+              genre={ genre }
+              date={ release_date }
+              desc={ short_description}
+              title={ title }
+              addfav={ adicionarFilmeFavorito } />
           )) : null
         }
       </div>
+      {
+        favs ? favs.map((x) => <p>{ x }</p>) : null
+      }
     </div>
   )
 
