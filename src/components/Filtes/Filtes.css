@@ -2,6 +2,7 @@
   width: 100%;
   margin: 10px;
   justify-content: space-evenly;
+  color: 'white';
 }
 
 .Filtes input {
@@ -25,4 +26,13 @@
 #check {
   width: 5vw;
   margin: 0;
+}
+
+.css-1nmdiq15-menu {
+  color: black;
+}
+
+.text-input {
+  min-height: 38px;
+  margin-left: 5px;
 }

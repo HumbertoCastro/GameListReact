@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import './Filtes.css';
 import gameContext from '../../context/gameContext';
+import Select from 'react-select';
 
 const Filtes = ({ logged }) => {
   const [onlyfavs, setOnlyfavs] = useState(false);
@@ -12,7 +13,6 @@ const Filtes = ({ logged }) => {
   } = useContext(gameContext);
 
   const renderGenres = () => {
-    console.log('UNFILTER,', unFilterGames);
     const all = unFilterGames.map(({ genre }) => genre);
     const without_duplicates = [...new Set(all)];
     return without_duplicates;
@@ -35,7 +35,7 @@ const Filtes = ({ logged }) => {
     }
   }
 
-  const handleRatings = ({ target: { value } }) => {
+  const handleRatings = ({value}) => {
     let arrayToBeUsed = [];
     if (onlyfavs) {
       arrayToBeUsed = unFilterGames.filter(({fav}) => fav);
@@ -70,7 +70,7 @@ const Filtes = ({ logged }) => {
 
   return (
   <div className="Filtes row">
-    <select onChange={({ target: { value } }) => {
+    <Select onChange={({ value }) => {
       console.log('handle')
       if (value === 'all') {
         if (onlyfavs) {
@@ -87,25 +87,34 @@ const Filtes = ({ logged }) => {
           setGames(newList);
         }
       }
-    } }>
-      <option value="all">All</option>
-      {
-        renderGenres().map((x) => <option value={ x }>{ x }</option>)
-      }
-    </select>
-    <input type='text' onChange={ handleInput } placeholder='Search game by name' />
+    } } options={ [{value: 'all', label: 'All'}, ...renderGenres().map((x) => ({value: x, label: x}))] }>
+    <option value="all">All</option>
+    {
+      renderGenres().map((x) => <option value={ x }>{ x }</option>)
+    }</Select>
+    <input type='text' className='text-input' onChange={ handleInput } placeholder='Search game by name' />
     {
       logged ? 
       <div className='row'>
-        <label for='check' className='checkbox'> Show only favs</label>
+        <label for='check' className='checkbox' style={{ color: 'white' }}> Show only favs</label>
         <input id='check' type='checkbox' onChange={ handleCheckbox } />
       </div> : null
     }
-    <select onChange={ handleRatings }>
-      <option value='none'>Rate</option>
-      <option value='high'>Higher ratings</option>
-      <option value='low'>Lower ratings</option>
-    </select>
+    <Select onChange={ handleRatings } options={ [{
+      value: 'none',
+      label: 'Select Rating',
+    }, {
+      value: 'high',
+      label: 'Highest Ratings',
+    }, {
+      value: 'low',
+      label: 'Lowest Ratings',
+    }] } styles={{
+      control: (baseStyles, state) => ({
+        ...baseStyles,
+        color: 'red',
+      }),
+    }}></Select>
   </div>
 )};
 

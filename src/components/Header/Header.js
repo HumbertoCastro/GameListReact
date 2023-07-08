@@ -3,16 +3,18 @@ import PropTypes from 'prop-types';
 import './Header.css';
 import controler from '../../img/controller.svg'
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../firebase';
 
 const Header = () => {
   const [logged, setLogged] = useState(false);
   const auth = getAuth();
+  const history = useNavigate();
 
   const singOut = () => {
     logout();
     setLogged(false);
+    history('auth/')
   };
 
   useEffect(() => {
@@ -33,7 +35,7 @@ const Header = () => {
     </div>
     <div className='row'>
       {
-        logged ? <button onClick={ singOut }>SingOut</button> : <Link to='auth/'>Login</Link>
+        logged ? <button onClick={ singOut } className='signout-btn'>SingOut</button> : <Link to='auth/' className='login-btn'>Login</Link>
       }
     </div>
   </header>

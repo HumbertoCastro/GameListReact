@@ -12,7 +12,6 @@ const auth = getAuth();
 const badStatus = [500, 502, 504, 504, 507, 508, 509];
 
 const GameList = () => {
-  console.log('gamelistss')
   const [error, setError] = useState(false);
   const [errMsg, setErrMsg] = useState(['']);
   const [favs, setFavs] = useState([]);
@@ -44,8 +43,9 @@ const GameList = () => {
   };
 
   const request = async () => {
+    let timeOut = () => {};
     const timeoutPromise = new Promise((resolve, reject) => {
-      setTimeout(resolve, 5000, {'status': 408});
+      timeOut = setTimeout(resolve, 5000, {'status': 408});
     });
     const url = 'https://games-test-api-81e9fb0d564a.herokuapp.com/api/data';
     const res = await Promise.race([
@@ -56,7 +56,6 @@ const GameList = () => {
       }),
       timeoutPromise
     ]);
-    console.log(res);
     if (res.status === 408) {
       setErrMsg(['O servidor demorou para responder, tente mais tarde', res.status]);
       setError(true);
@@ -65,8 +64,7 @@ const GameList = () => {
       setErrMsg(['O servidor fahou em responder, tente recarregar a página', res.status]);
       setError(true);
     } else if (res.status === 200) {
-      console.log('respondeu', timeoutPromise);
-      clearTimeout(timeoutPromise);
+      clearTimeout(timeOut);
       const jsonRes = await res.json();
       if (favs) {
         let ratings = null
@@ -88,7 +86,6 @@ const GameList = () => {
           const gamesListArray = [...favs, ...jsonRes.filter((x) =>  !favs.some((favoritos) => favoritos.title === x.title))];
           setGames(gamesListArray);
           setUnFilter(gamesListArray);
-
         }
       }
     } else {
@@ -99,6 +96,7 @@ const GameList = () => {
 
   const getFavs = async (uid) => {
     const list = await getFavGames(uid);
+    console.log(list);
     if (list) {
       const favsList = list.map(({ dev, thumb, genre, date, desc, title, stars}) => ({
         developer: dev,

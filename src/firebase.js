@@ -47,7 +47,7 @@ const logInWithEmailAndPassword = async (email, password) => {
     console.log(res.id);
     return res.user;
   } catch (err) {
-    console.error(err);
+    console.error('log in with email and password');
     throw Error(err);
   }
 };
@@ -63,6 +63,7 @@ const registerWithEmailAndPassword = async (email, password) => {
     });
     console.log('end')
   } catch (err) {
+    console.log('register with email')
     throw Error(err);
   }
 };
@@ -93,19 +94,26 @@ const addFavGame = async (userId, gameObject) => {
     });
     return gamesList;
   } catch (err) {
+    console.log('add fav game', userId, gameObject);
     throw Error(err);
   }
 }
 
 const getFavGames = async (userId) => {
+  console.log('getfav', userId)
   const gamesRef = collection(db, "users");
   const q = query(gamesRef, where('uid', '==', userId));
-  const querySnapshot = await getDocs(q);
-  let gamesList=[];
-  querySnapshot.forEach((doc) => {
-    gamesList = doc.data().favGames;
-  });
-  return gamesList;
+  try {
+    const querySnapshot = await getDocs(q);
+    let gamesList=[];
+    querySnapshot.forEach((doc) => {
+      gamesList = doc.data().favGames;
+    });
+    return gamesList;
+  } catch (err) {
+    console.log('getFavGames', userId);
+    throw Error(err);
+  }
 }
 
 const logout = () => {
@@ -114,6 +122,7 @@ const logout = () => {
 
 
 const addRating = async (userId, gameObject) => {
+  console.log('add rating', userId, gameObject)
   const gamesRef = collection(db, "users");
   console.log(userId, gameObject);
   const q = query(gamesRef, where('uid', '==', userId));
@@ -145,22 +154,41 @@ const addRating = async (userId, gameObject) => {
     await updateDoc(washingtonRef, {
       ratings,
     });
+    console.log(gameObject);
+    const res = await getFavGames(userId);
+    if (res.some((x) => x.title === gameObject.title)) {
+      await updateDoc(washingtonRef, {
+        favGames: res.map((x) => {
+          if (x.title === gameObject.title) {
+            x.stars = gameObject.stars;
+          }
+          return x;
+        }),
+      });
+    }
     return ratings;
   } catch (err) {
+    console.log('add rating', userId, gameObject)
     throw Error(err);
   }
 }
 
 
 const getRatins = async (userId) => {
+  console.log("getratings", userId)
   const gamesRef = collection(db, "users");
   const q = query(gamesRef, where('uid', '==', userId));
-  const querySnapshot = await getDocs(q);
-  let ratings=[];
-  querySnapshot.forEach((doc) => {
-    ratings = doc.data().ratings;
-  });
-  return ratings;
+  try {
+    const querySnapshot = await getDocs(q);
+    let ratings=[];
+    querySnapshot.forEach((doc) => {
+      ratings = doc.data().ratings;
+    });
+    return ratings;
+  } catch (err) {
+    console.log('Get Ratings', userId)
+    throw Error(err);
+  }
 }
 
 

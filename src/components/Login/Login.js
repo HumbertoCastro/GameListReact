@@ -25,7 +25,7 @@ const Login = ({set, setLogged}) => {
     } else {
       try {
         const res = await logInWithEmailAndPassword(email, senha);
-        setUser(res);
+        setUser(res.uid);
         history('/GameListReact/');
       } catch (e) {
         setMensagem('Email or Password my be wrong');
@@ -51,6 +51,10 @@ const Login = ({set, setLogged}) => {
         event.preventDefault();
         history('register');
       }}>Register</button>
+      <button class="sign-in" onClick={(event) => {
+        event.preventDefault();
+        history('/GameListReact/');
+      }}>back </button>
     </div>
     <p>{mensagem}</p>
 </form>

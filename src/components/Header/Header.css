@@ -2,6 +2,7 @@
   align-self: flex-start;
   width: var(--widthScream);
   margin: auto;
+  color: white;
 }
 
 .Header h1 {
@@ -20,4 +21,21 @@ button {
   border: 1px solid black;
   border-radius: 7px;
   margin: auto;
+  min-height: 38px;
+  background-color: none;
+}
+
+.login-btn {
+  border: 1px solid black;
+  border-radius: 7px;
+  margin: auto;
+  min-height: 38px;
+  background-color: white;
+  text-decoration: none;
+  color: black;
+  width: 12vw;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
