@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/GameListReact/static/css/main.922d9903.css",
-    "main.js": "/GameListReact/static/js/main.8eb2ae08.js",
+    "main.css": "/GameListReact/static/css/main.fe82d581.css",
+    "main.js": "/GameListReact/static/js/main.462daa5f.js",
     "static/js/787.cf510431.chunk.js": "/GameListReact/static/js/787.cf510431.chunk.js",
     "static/media/controller.svg": "/GameListReact/static/media/controller.d8114ed6e0c243cae8df1955c2f600a9.svg",
     "index.html": "/GameListReact/index.html",
     "static/media/emoji-frown.svg": "/GameListReact/static/media/emoji-frown.bb79cb3d29988450d71f427746acff3f.svg",
-    "main.922d9903.css.map": "/GameListReact/static/css/main.922d9903.css.map",
-    "main.8eb2ae08.js.map": "/GameListReact/static/js/main.8eb2ae08.js.map",
+    "main.fe82d581.css.map": "/GameListReact/static/css/main.fe82d581.css.map",
+    "main.462daa5f.js.map": "/GameListReact/static/js/main.462daa5f.js.map",
     "787.cf510431.chunk.js.map": "/GameListReact/static/js/787.cf510431.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.922d9903.css",
-    "static/js/main.8eb2ae08.js"
+    "static/css/main.fe82d581.css",
+    "static/js/main.462daa5f.js"
   ]
 }
