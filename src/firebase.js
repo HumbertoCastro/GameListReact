@@ -55,22 +55,23 @@ const logInWithEmailAndPassword = async (email, password) => {
 const registerWithEmailAndPassword = async (email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(res.id);
     const user = res.user;
     await addDoc(collection(db, "users"), {
       uid: user.uid,
       authProvider: "local",
       email,
     });
+    console.log('end')
   } catch (err) {
     throw Error(err);
   }
 };
 
-const addFavMovie = async (userId, title) => {
-  const citiesRef = collection(db, "users");
-  console.log(userId);
-  const q = query(citiesRef, where('uid', '==', userId.uid));
+const addFavGame = async (userId, gameObject) => {
+  console.log('ADD FAV GAME FOI CHAMADO UHUL')
+  const gamesRef = collection(db, "users");
+  console.log(userId, gameObject);
+  const q = query(gamesRef, where('uid', '==', userId));
   const querySnapshot = await getDocs(q);
   let id = 0;
   let gamesList=[];
@@ -78,20 +79,27 @@ const addFavMovie = async (userId, title) => {
     gamesList = doc.data().favGames;
     id = doc.id;
   });
-  gamesList = [...gamesList, title];
+  if (gamesList) {
+    if (!gamesList.some((x) => x.title === gameObject.title)) {
+      gamesList = [...gamesList, gameObject];
+    }
+  } else {
+    gamesList = [gameObject];
+  }
   const washingtonRef = doc(db, "users", id);
   try {
     await updateDoc(washingtonRef, {
-      favGames: [...new Set(gamesList)],
+      favGames: gamesList,
     });
+    return gamesList;
   } catch (err) {
     throw Error(err);
   }
 }
 
 const getFavGames = async (userId) => {
-  const citiesRef = collection(db, "users");
-  const q = query(citiesRef, where('uid', '==', userId.uid));
+  const gamesRef = collection(db, "users");
+  const q = query(gamesRef, where('uid', '==', userId));
   const querySnapshot = await getDocs(q);
   let gamesList=[];
   querySnapshot.forEach((doc) => {
@@ -100,10 +108,69 @@ const getFavGames = async (userId) => {
   return gamesList;
 }
 
+const logout = () => {
+  signOut(auth);
+};
+
+
+const addRating = async (userId, gameObject) => {
+  const gamesRef = collection(db, "users");
+  console.log(userId, gameObject);
+  const q = query(gamesRef, where('uid', '==', userId));
+  const querySnapshot = await getDocs(q);
+  let id = 0;
+  let ratings=[];
+  querySnapshot.forEach((doc) => {
+    ratings = doc.data().ratings;
+    id = doc.id;
+  });
+  if (ratings) {
+    if (!ratings.some((x) => x.title === gameObject.title)) {
+      ratings = [...ratings, gameObject];
+    } else {
+      const newRatins = ratings.map((x) => {
+        if (x.title === gameObject.title) {
+          x.stars = gameObject.stars;
+        }
+        return x;
+      })
+      ratings = newRatins;
+      console.log(newRatins, ratings);
+    }
+  } else {
+    ratings = [gameObject];
+  }
+  const washingtonRef = doc(db, "users", id);
+  try {
+    await updateDoc(washingtonRef, {
+      ratings,
+    });
+    return ratings;
+  } catch (err) {
+    throw Error(err);
+  }
+}
+
+
+const getRatins = async (userId) => {
+  const gamesRef = collection(db, "users");
+  const q = query(gamesRef, where('uid', '==', userId));
+  const querySnapshot = await getDocs(q);
+  let ratings=[];
+  querySnapshot.forEach((doc) => {
+    ratings = doc.data().ratings;
+  });
+  return ratings;
+}
+
+
 export {
   auth,
   db,
-  addFavMovie,
+  logout,
+  addRating,
+  addFavGame,
+  getRatins,
   getFavGames,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,

@@ -48,6 +48,7 @@
   min-height: 30vh;
   align-items: flex-start;
   justify-content: space-between;
+  margin-bottom: 5vh;
 }
 
 .genre {
@@ -65,4 +66,17 @@
 
 .botton-row {
   width: 100%;
+  align-self: center;
+  position: fixed;
+  bottom: 0;
+}
+
+.top-row {
+  width: 100%;
+  align-self: center;
+}
+
+.fav-btn {
+  border: none;
+  margin: 0;
 }

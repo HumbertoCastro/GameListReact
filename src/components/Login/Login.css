@@ -8,6 +8,14 @@
   background-color: #171717;
   border-radius: 25px;
   transition: .4s ease-in-out;
+  max-width: calc(var(--widthScream) / 1.4);
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40vh;
 }
 
 .form:hover {

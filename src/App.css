@@ -1,6 +1,7 @@
 body {
   background-color: rgb(17, 17, 17);
-  color: white
+  color: white;
+  width: 100vw;
 }
 
 .App {
@@ -24,4 +25,8 @@ body {
 
 .s-btw {
   justify-content: space-between;
+}
+
+#root {
+  width: 100vw;
 }

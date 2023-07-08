@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { logInWithEmailAndPassword } from "../../firebase";
+import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
 import gameContext from '../../context/gameContext';
 
 const Login = ({set, setLogged}) => {
-
+  const history = useNavigate();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
@@ -25,7 +26,7 @@ const Login = ({set, setLogged}) => {
       try {
         const res = await logInWithEmailAndPassword(email, senha);
         setUser(res);
-        setLogged(true);
+        history('/GameListReact/');
       } catch (e) {
         setMensagem('Email or Password my be wrong');
         console.log(e)
@@ -48,7 +49,7 @@ const Login = ({set, setLogged}) => {
       <button class="login" onClick={verificarEmailSenha}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
       <button class="sign-in" onClick={(event) => {
         event.preventDefault();
-        set(true);
+        history('register');
       }}>Register</button>
     </div>
     <p>{mensagem}</p>

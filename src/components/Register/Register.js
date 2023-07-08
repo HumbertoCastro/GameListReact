@@ -7,9 +7,11 @@ import {
   auth,
   registerWithEmailAndPassword,
 } from "../../firebase.js";
+import { useNavigate } from 'react-router-dom';
 
 const Register = ({set}) => {
 
+  const history = useNavigate();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
@@ -26,7 +28,7 @@ const Register = ({set}) => {
     } else {
       try {
         await registerWithEmailAndPassword(email, senha);
-        set(true);
+        history('/GameListReact/auth/')
       } catch (e) {
         setMensagem(e.message);
       }
@@ -47,7 +49,7 @@ const Register = ({set}) => {
       <button className='login' onClick={verificarEmailSenha}>
         Create Account
       </button>
-      <button className='login' onClick={() => set(false)}>
+      <button className='login' onClick={() => history('/GameListReact/auth/')}>
         Back to login
       </button>
     </div>

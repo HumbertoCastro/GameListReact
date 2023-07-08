@@ -1,14 +1,14 @@
 .Filtes {
-  width: var(--widthScream);
-  margin: auto;
-  justify-content: space-between;
+  width: 100%;
+  margin: 10px;
+  justify-content: space-evenly;
 }
 
 .Filtes input {
   width: calc(var(--widthScream) / 2 );
   border-radius: 5px;
-  border: none;
   flex-grow: 1;
+  border: none;
 }
 
 .Filtes select {
@@ -16,4 +16,13 @@
   margin-right: 10px;
   border-radius: 5px;
   border: none;
+}
+
+.checkbox {
+  margin-left: 5px;
+}
+
+#check {
+  width: 5vw;
+  margin: 0;
 }
