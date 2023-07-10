@@ -12,6 +12,7 @@ const Error = ({msg}) => (
       }
     </h1>
     <p>{ msg[0] }</p>
+    <button onClick={() => window.location.reload(true)}>Refresh Page</button>
   </div>
 );
 

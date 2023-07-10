@@ -96,7 +96,7 @@ const GameList = () => {
 
   const getFavs = async (uid) => {
     const list = await getFavGames(uid);
-    console.log(list);
+    console.log('GET FAVSSS,', list);
     if (list) {
       const favsList = list.map(({ dev, thumb, genre, date, desc, title, stars}) => ({
         developer: dev,
@@ -140,7 +140,9 @@ const GameList = () => {
       <Filtes logged={ logged } />
       <div className='games-display'>
         {
-          games.length > 0 ? games.map(({ developer, thumbnail, genre, release_date, short_description, title, fav, stars}) => (
+          games.length > 0 ? games.map(({ developer, thumbnail, genre, release_date, short_description, title, fav, stars}) => { 
+            console.log(fav);
+            return (
             <GameCard
               dev={ developer }
               thumb={ thumbnail }
@@ -151,9 +153,9 @@ const GameList = () => {
               fav={fav}
               stars={stars}
               addfav={ handleClickFav } />
-          )) : favs.length > 0 ? favs.map(({ developer, thumbnail, genre, release_date, short_description, title, fav, stars}) => (
+          )}) : favs.length > 0 ? favs.map(({ developer, thumbnail, genre, release_date, short_description, title, fav, stars}) => (
             <GameCard
-              dev={ developer }
+              dev={ developer + 'render By favs' }
               thumb={ thumbnail }
               genre={ genre }
               date={ release_date }

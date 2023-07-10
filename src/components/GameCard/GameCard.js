@@ -12,11 +12,26 @@ const GameCard = ({ dev, thumb, genre, date, desc, title, addfav, fav, stars }) 
   const [logged, setLogged] = useState(false);
   const [favGame, setFav] = useState(fav);
 
+  console.log(fav === true ? `${title} Favorito ${favGame}` : '');
+
   const {
     user,
+    setUnFilter,
+    unFilterGames,
   } = useContext(gameContext);
 
   const handleRating = (rate) => {
+    const unfilterList = unFilterGames;
+    if (unfilterList.some((x) => x.title === title)) {
+      unfilterList.map((x) => {
+        if (x.title === title) {
+          x.stars = rate;
+          x.fav = true;
+        }
+        return x;
+      })
+    };
+    setUnFilter(unfilterList);
     setRating(rate);
     addRating(user, {title, stars: rate})
   }
@@ -62,7 +77,7 @@ const GameCard = ({ dev, thumb, genre, date, desc, title, addfav, fav, stars }) 
         <button onClick={() => {
           setFav(true);
           addfav({dev, thumb, genre, date, desc, title, stars: rating,});
-          } } disabled={!logged} className='fav-btn' style={ favGame ? { color: 'red' }  : null} >{ heart() }</button>
+          } } disabled={!logged} className='fav-btn' style={ favGame || fav ? { color: 'red' }  : null} >{ heart() }</button>
       </div>
     </div>
   </div>

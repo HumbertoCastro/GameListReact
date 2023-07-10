@@ -26,6 +26,7 @@ const Filtes = ({ logged }) => {
     }
   }
   const handleCheckbox = ({ target: { checked } }) => {
+    console.log(unFilterGames.filter(({ fav }) => fav));
     if (checked) {
       setGames(unFilterGames.filter(({ fav }) => fav));
       setOnlyfavs(true);
