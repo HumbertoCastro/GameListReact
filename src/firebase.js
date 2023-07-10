@@ -25,12 +25,12 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDxbvwkfCXQdptqpkqAJ_m3mmK60n0IndU",
-  authDomain: "gamelist-abeac.firebaseapp.com",
-  projectId: "gamelist-abeac",
-  storageBucket: "gamelist-abeac.appspot.com",
-  messagingSenderId: "983545049598",
-  appId: "1:983545049598:web:b8ffc79f09dfbdd0d210af"
+  apiKey: process.env.REACT_APP_APIKEY,
+  authDomain: process.env.REACT_APP_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_PROJECTID,
+  storageBucket: process.env.REACT_APP_STORAGE,
+  messagingSenderId: process.env.REACT_APP_MSGSENDERID,
+  appId: process.env.REACT_APP_APPID,
 };
 
 // Initialize Firebase
